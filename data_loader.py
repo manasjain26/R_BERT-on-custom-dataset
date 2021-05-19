@@ -150,6 +150,9 @@ def convert_examples_to_features(
         e21_p = tokens_a.index("<e2>")  # the start position of entity2
         e22_p = tokens_a.index("</e2>")  # the end position of entity2
 
+        if e11_p > 127 or e21_p > 127:
+            continue
+
         # Replace the token
         tokens_a[e11_p] = "$"
         tokens_a[e12_p] = "$"
