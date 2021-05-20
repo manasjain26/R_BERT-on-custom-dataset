@@ -2,7 +2,7 @@ import copy
 import csv
 import json
 import logging
-import os
+import os,re
 
 import torch
 from torch.utils.data import TensorDataset
@@ -143,16 +143,24 @@ def convert_examples_to_features(
             logger.info("Writing example %d of %d" % (ex_index, len(examples)))
 
         tokens_a = tokenizer.tokenize(example.text_a)
-        print(tokens_a)
-
-        e11_p = tokens_a.index("<e1>")  # the start position of entity1
-        e12_p = tokens_a.index("</e1>")  # the end position of entity1
-        e21_p = tokens_a.index("<e2>")  # the start position of entity2
-        e22_p = tokens_a.index("</e2>")  # the end position of entity2
-
-        if e11_p > 127 or e21_p > 127:
+        #print(tokens_a)
+        try:
+            e11_p = tokens_a.index("<e1>")  # the start position of entity1
+            e12_p = tokens_a.index("</e1>")  # the end position of entity1
+            e21_p = tokens_a.index("<e2>")  # the start position of entity2
+            e22_p = tokens_a.index("</e2>")  # the end position of entity2
+        except:
             continue
-
+        if e12_p > max_seq_len - 1 or e22_p > max_seq_len - 1:
+            continue
+        if len([m.start() for m in re.finditer('<e1>', example.text_a)])>1:
+          continue 
+        if len([m.start() for m in re.finditer('</e1>', example.text_a)])>1:
+          continue    
+        if len([m.start() for m in re.finditer('<e2>', example.text_a)])>1:
+          continue    
+        if len([m.start() for m in re.finditer('</e2>', example.text_a)])>1:
+          continue    
         # Replace the token
         tokens_a[e11_p] = "$"
         tokens_a[e12_p] = "$"
