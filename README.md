@@ -15,3 +15,13 @@
 
 ## Drive link for trained models and logs
 	https://drive.google.com/drive/folders/1GYEGvW9VhQpMc9c0FcpyBpzsLdtsXxmg?usp=sharing
+	
+# Fine-tuning of MuRIL on the above dataset (Findings)
+
+## Accuracy
+	Fine-tune MuRIL - after 3 epochs, training accuracy was around 16% and test set accuracy was just 2%. (used TensorFlow framework)
+	
+# Future work and important ideas discussed 
+1) different formats of training data. i) replacing entities with their entity label ii) NER labels will be added with the entity.
+2) concept of bag of sentences which will be useful in denoising the dataset
+3) SpERT model Github (Points I feel are important for this task link - https://github.com/lavis-nlp/spert Reference issue link - https://github.com/lavis-nlp/spert/issues/30 (last 2 comments)). Hence Even if we train the SpERT model on our data at the time of inference we won't be able to provide e1 and e2 entity pair, relation we want to predict.
