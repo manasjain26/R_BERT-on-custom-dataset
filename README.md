@@ -4,7 +4,7 @@
 	Train set - 16784
 	Test set - 175 (5 examples per label)
 	no of labels - 35
-
+	(You can find the data files in the data folder inside R-BERT and R-RoBERTa folders)
 ## Accuracy
 	R-BERT - 91.43% (after 2 epoch of training ~ 25 mins on Tesla K80 colab free GPU)
 	R-RoBERTa - 86.29% (after 3 epochs of training ~ 25 mins on Tesla T4 colab free GPU)
